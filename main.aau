@@ -1,0 +1,146 @@
+import console;
+
+function welcome(){ //欢迎信息
+	console.print("质数判断 0.1");
+	console.print("=================");
+	console.print(" By: 闪闪的星");
+	console.print(" URL: http://shansing.com");
+	console.print(" 使用：输入命令“?”可以查看帮助。");
+	console.print("------------------");
+}
+function help(){
+	console.print("本程序支持的命令列举如下：");
+	console.print("");
+	console.print(" /[正整数]         不算是真正的命令吧。效果等同于 /judge [正整数]。");
+	console.print(" /?                等同于 /help 命令。");
+	console.print(" /exit             退出。");
+	console.print(" /help             显示帮助信息，等同于 /? 命令。");
+	console.print(" /jd [正整数]      与“/judge [正整数]”相似，区别在自动进行因数分解而无选择。");
+	console.print(" /judge [正整数]   核心功能，进行质数判断（因数分解）。等同于 /[正整数]。");
+	console.print("");
+	console.print(" 使用“/123456”或“/judge 123456”试试！");
+	console.print(" 呃，这个程序暂时不支持“[正整数]”超过15位。");
+	console.print("");
+	console.print("再有，上述命令同样适用于外部参数调用，下面是一个例子：");
+	console.print('"' ++ io._exepath ++ '" /judge 123456');
+	console.print("------------------");
+}
+function judge(){ //核心功能
+	if (string.format("%.0f",tab[2]) == "1"){ //对1的处理
+		console.print("1 既不是质数，也不是合数。");
+		console.print("------------------");
+	}elseif(string.format("%.0f",tab[2]) == "0"){ //对0的处理，是彩蛋哦
+		eggshell();
+	}elseif(string.len(string.format("%.0f",tab[2])) > 15){ //对超过15位正整数的提示
+		console.print("错误：请求的数已超过15位，本程序暂不支持。");
+		console.print("------------------");
+	}else{
+    	var a,n,result,tempPercent = 2,tab[2],"","0";
+    	console.print("开始对 " ++ string.format("%.0f",n) ++ " 进行因数分解！");
+    	while (a <= math.sqrt(n)){
+    		if (tempPercent != math.round((a - 1) * 100 / math.sqrt(n),0)){
+    			tempPercent = math.round((a - 1) * 100 / math.sqrt(n),0);
+    			if (result == ""){ //如果还是在分解第一个数，下同
+    				console.writeBack("开始分解 " ++ string.format("%.0f",n) ++ "。（完成度：" ++ tempPercent ++ '%）');
+    			}else{
+    				console.writeBack("转而分解 " ++ string.format("%.0f",n) ++ "。（完成度：" ++ tempPercent ++ '%）');
+    			}
+    		}
+        if (n / a = math.floor(n / a)){   //如果 n 取余 a = 0，这时已经可以转而分解另一个数了
+    			if (result == ""){
+    				console.writeBack("开始分解 " ++ string.format("%.0f",n) ++ "。（完成度：已中止）");
+    				console.print("");
+    				console.print("已得出 " ++ string.format("%.0f",tab[2]) ++ " 是合数！");
+    				if (tab[1] != "jd"){ //“/jd”命令不需提示
+    					if (string.lower(console.getText("继续分解吗？输入字母“Y”按回车继续，其他输入视为结束：")) != "y") {
+    						result = "用户终止";
+    						break;
+    					}
+    				}
+    			}else{
+    				console.writeBack("转而分解 " ++ string.format("%.0f",n) ++ "。（完成度：已中止）");
+    				console.print("");
+    			}
+         		result = result ++ string.format("%.0f",a) ++ "×";
+            	n = n / a;
+            	a = 2;
+        	}else{
+            	a = a + 1;
+        	}
+    	}
+    	if (result == ""){ //结果为质数
+    		console.writeBack("开始分解 " ++ string.format("%.0f",n) ++ "。（完成度：已完成）");
+    		console.print("");
+    		console.print("完成！" ++ string.format("%.0f",tab[2]) ++ " 是质数！");
+    	}elseif(result == "用户终止"){ //用户选择终止，只能得到为合数的结果，但没有因数分解结果
+    		console.print("完成，分解过程被用户结束。");
+    	}else{ //结果为合数，还要输出分解结果
+    		console.writeBack("转而分解 " ++ string.format("%.0f",n) ++ "。（完成度：已完成）");
+    		console.print("");
+        	console.print("完成！" ++ string.format("%.0f",tab[2]) ++ "＝" ++ result ++ string.format("%.0f",n));
+    	}
+		console.print("------------------");
+	}
+}
+function exit(){
+	console.close();
+}
+function eggshell(){ //彩蛋
+	var eggNo = 0;
+	while (eggNo <= 10){
+		console.writeBack(" (°ο°)~@");
+		sleep(100);
+		console.writeBack(" (°__°)~@");
+		sleep(100);
+		eggNo = eggNo + 1;
+	}
+	console.print("");
+	console.print("------------------");
+}
+function command(){ //处理命令
+	if (tab[1] == ""){
+	
+	}elseif (tab[1] == "help" or tab[1] == "?"){
+		help();
+	}elseif (tab[1] == "exit"){
+		exit();
+	}elseif (tab[1] == "judge" || tab[1] == "jd"){
+		if(string.find(tab[2], "^[+]?\d+$")){
+			judge();
+		}else{
+			console.print("错误：输入的“" ++ tab[2] ++ "”不是有效的正整数！");
+			console.print("------------------");
+		}
+	}elseif(string.find(str,"^[+]?\d+$")){ //若是输入的0或正整数（可含正号）
+		tab[2] = tab[1];
+		tab[1] = "judge";
+		judge();
+	}else{
+		console.print("错误：“/" ++ tab[1] ++ "”既不是本程序支持的命令，也不是“/”加正整数的结构。");
+		console.print("------------------");
+	}
+}
+
+console.open();
+console.setTitle("质数判断");
+tab = {""};
+if (#_CMDLINE){ //若存在程序运行时的命令行参数
+	if (string.startWith(_CMDLINE,'/')){
+		..str = string.sub(_CMDLINE,2,-1);
+		..tab = string.split(string.lower(str),' '); //小写哟
+		command();
+	}else{
+		console.print("错误：请求的命令行参数无效，请检查格式。");
+		console.print("------------------");
+	}
+}else{ //一般运行
+	welcome();
+	while (tab[1] != "exit"){ //总是在过程结束后再让用户输入命令，除非用户使用了退出命令
+		..str = console.getText("/");
+		..tab = string.split(string.lower(str),' '); //得到空格分割的 table，顺便转为小写
+		command();
+	}
+}
+
+// http://shansing.com
+// 请遵守开源协议！
