@@ -7,8 +7,8 @@ function canZhengChu(a,b){ //判断a是否能整除b
 
 function welcome(){ //欢迎信息
 	var text = /*
-质数判断 0.2 β
-(C)版权所有 2014 闪闪的星
+质数判断 0.2
+(C)版权所有 2014-2015 闪闪的星
 提示：使用命令“/?”可以查看帮助
 */;
 	console.print(text);
@@ -31,32 +31,25 @@ function help(){
 	console.print('"' ++ io._exepath ++ '" /jd 123456');
 	text = /*
 
-作者主页是 http://shansing.com，可在上面了解算法详情。	
+作者主页是 https://shansing.com，可在上面了解算法详情。	
 */;
 	console.print(text);
 }
 function judge(){ //核心功能
 /*
-  下面会用到素数（即质数）的性质：
-  1. 2是唯一的偶素数；
-  2. 没有比5大的素数能够以5结尾；
-  3. 在素数2，3，5，7之后，其他的素数必须以1，3，7，9结尾；
-  4. 如果将2和3以外的素数加上1或减去1，其结果必然是6的倍数。
-  
-  本人概括为（下面换用“质数”概念表达）：
+  下面会用到质数的性质，本人概括为：
   a. 6以内有且只有2，3，5是质数；
   b. 6之后的质数必以1，3，7，9结尾；
   c. 4以后的质数必然和6的某一倍数相邻。
   
   我们的目标是，得出一个有着比较简单的规律的数列，由数列所有项构成的集合能较好地排除合数，而包含所有质数。
   根据那些性质（特别是性质c），我得出了一个从数5开始“加2加4”的数列（质数2，3，5单独列出），能满足上述要求；
-  这个数列用以代替原来从2开始“加1”的数列，并略过除5外5倍数的项，可使处理速度提升为原来的3倍以上。
-*/
-/*  
+  这个数列用以代替原来从2开始“加1”的数列，并略过除5外5倍数的项，可使处理速度提升为3倍。
+  
   欲知详情，请查阅作者博客。
 */
 	if (string.find(tab[2],"[1-9]")){
-		n = tonumber(string.format("%.0f",tonumber(string.sub(tab[2],string.find(tab[2],"[1-9]"),-1)))); //必须去0，否则tonumber遇大数异常
+		n = tonumber(string.format("%.0f",tonumber(string.sub(tab[2],string.find(tab[2],"[1-9]"),-1)))); //必须去0，否则会被识别为8进制数
 	}else{
 		n = 0;
 	}
@@ -72,7 +65,7 @@ function judge(){ //核心功能
     	var a,result,tempPercent,k = 2,"",0,1;
     	if (tab[1] != "jd" && n != 2 && n != 3){
     		console.print("开始初步判断 " ++ string.format("%.0f",n) ++ " 是否为合数。");
-   			if (( canZhengChu(n + 1, 6) && canZhengChu(n - 1, 6) ) //如果n并不与6的某一倍数相邻
+   			if (( !canZhengChu(n + 1, 6) && !canZhengChu(n - 1, 6) ) //如果n并不与6的某一倍数相邻
    			  || ( canZhengChu(math.sqrt(n), 1) )){ //或者n是一个完全平方数
     			console.print("(!) 已得出 " ++ string.format("%.0f",tonumber(string.sub(tab[2],string.find(tab[2],"[1-9]"),-1))) ++ " 是合数！");
     			console.writeBack("(?) 继续分解吗？输入字母“Y”继续，其他输入视为结束：");
@@ -194,7 +187,7 @@ function command(){ //对命令进行处理
 console.open();
 console.setTitle("质数判断");
 tab = {""};
-if (#_CMDLINE){ //若存在程序运行时的命令行参数
+if (#_CMDLINE){ //若程序运行时有命令行参数
 	if (string.startWith(_CMDLINE,'/')){
 		..str = string.sub(_CMDLINE,2,-1);
 		..tab = string.split(string.lower(str),' '); //小写哟
@@ -212,5 +205,5 @@ if (#_CMDLINE){ //若存在程序运行时的命令行参数
 	}while(tab[1] != "exit"); //总是在过程结束后再让用户输入命令，除非用户使用了退出命令
 }
 
-// http://shansing.com
+// https://shansing.com
 // 请遵守开源协议！

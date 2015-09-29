@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="gb2312"?>
-<project ver="6" name="质数判断0" libEmbed="true" icon="..." ui="console" output="质数判断0.exe" CompanyName="闪闪的星" FileDescription="质数判断 控制台版" LegalCopyright="Copyright (C) 闪闪的星 2014 | http://shansing.com" ProductName="质数判断" InternalName="质数判断0" FileVersion="0.2.0.0" ProductVersion="0.2.0.0" publishDir="/Publish/">
+<project ver="6" name="质数判断0" libEmbed="true" icon="..." ui="console" output="质数判断0.exe" CompanyName="闪闪的星" FileDescription="质数判断 控制台版" LegalCopyright="Copyright (C) 闪闪的星 2014-2015" ProductName="质数判断" InternalName="质数判断0" FileVersion="0.2.0.01" ProductVersion="0.2.0.01" publishDir="/Publish/">
 	<file name="main.aau" path="main.aau"/>
 	<folder name="资源文件" path="res" embed="true"/>
 </project>

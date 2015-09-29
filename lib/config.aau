@@ -5,9 +5,9 @@ config  = ..fsys.config("/config/");
 //不需要序列化的配置名字前请添加下划线
 namespace config {
 	__appName = "质数判断";
-	__appVersion = "0.1.0.0";
+	__appVersion = "0.2.0.1";
 	__appDescription = "质数判断（因数分解）控制台版";
-	__website = "http://shansing.com";
+	__website = "https://shansing.com";
 }
 
 /**
