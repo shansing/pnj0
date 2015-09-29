@@ -56,7 +56,7 @@ function judge(){ //核心功能
   欲知详情，请查阅作者博客。
 */
 	if (string.find(tab[2],"[1-9]")){
-		n = tonumber(string.format("%.0f",tonumber(string.sub(tab[2],string.find(tab[2],"[1-9]"),-1)))); //tonumber("089")居然不行！
+		n = tonumber(string.format("%.0f",tonumber(string.sub(tab[2],string.find(tab[2],"[1-9]"),-1)))); //必须去0，否则tonumber遇大数异常
 	}else{
 		n = 0;
 	}
@@ -75,7 +75,8 @@ function judge(){ //核心功能
    			if (( canZhengChu(n + 1, 6) && canZhengChu(n - 1, 6) ) //如果n并不与6的某一倍数相邻
    			  || ( canZhengChu(math.sqrt(n), 1) )){ //或者n是一个完全平方数
     			console.print("(!) 已得出 " ++ string.format("%.0f",tonumber(string.sub(tab[2],string.find(tab[2],"[1-9]"),-1))) ++ " 是合数！");
-    			console.print("(?) 继续分解吗？输入字母“Y”继续，其他输入视为结束：");
+    			console.writeBack("(?) 继续分解吗？输入字母“Y”继续，其他输入视为结束：");
+    			console.writeBack("(?) 继续分解吗？输入字母“Y”继续，其他输入视为结束：");//用两行writeBack代替一行print是为了让接下来的字符输入跟随在后
     			if (string.lower(console.getche()) != "y") {
     				result = "用户终止";
     			}else{
@@ -103,7 +104,8 @@ function judge(){ //核心功能
     					console.print("");
     					if (tab[1] != "jd2"){console.print("(!) 已得出 " ++ string.format("%.0f",tonumber(string.sub(tab[2],string.find(tab[2],"[1-9]"),-1))) ++ " 是合数！");} //“jd2”在此体现
     					if (tab[1] == "judge"){ //“/jd”命令不需提示
-    						console.print("(?) 继续分解吗？输入字母“Y”继续，其他输入视为结束：");
+    						console.writeBack("(?) 继续分解吗？输入字母“Y”继续，其他输入视为结束：");
+    						console.writeBack("(?) 继续分解吗？输入字母“Y”继续，其他输入视为结束：");
     						if (string.lower(console.getche()) != "y") {
     							console.print("");
     							result = "用户终止";
@@ -173,10 +175,10 @@ function command(){ //对命令进行处理
 	}elseif (tab[1] == "exit"){
 		exit();
 	}elseif (tab[1] == "judge" || tab[1] == "jd"){
-		if(string.find(tab[2], "^[+]?\d+$")){
+		if(#tab[2] && string.find(tab[2], "^[+]?\d+$")){
 			judge();
 		}else{
-			console.print("错误：输入的“" ++ tab[2] ++ "”不是有效的正整数！");
+			console.print("错误：请输入有效的正整数！");
 			console.print("");
 		}
 	}elseif(string.find(tab[1],"^[+]?\d+$")){ //若是输入的0或正整数（可含正号）
