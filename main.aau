@@ -1,6 +1,7 @@
 import console;
 function canZhengChu(a,b){ //判断a是否能整除b
-	return (a / b) == math.floor(a / b);
+	return (a % b) == 0;
+	/* return (a / b) == math.floor(a / b); */
 	/*var table = {math.modf(a / b)};
 	return table[2] == 0; 这个方法比较慢，不使用*/
 }
